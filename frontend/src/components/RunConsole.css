@@ -1,0 +1,127 @@
+.run-console {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+}
+
+.run-console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.run-console-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.start-run-button {
+  padding: 8px 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.start-run-button:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.start-run-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.run-status {
+  margin-bottom: 15px;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-text {
+  font-weight: 500;
+  color: #333;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #42a5f5;
+  transition: width 0.3s ease;
+}
+
+.run-logs {
+  flex: 1;
+  overflow-y: auto;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 15px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  min-height: 200px;
+  max-height: 300px;
+}
+
+.log-empty {
+  color: #888;
+  text-align: center;
+  padding: 20px;
+}
+
+.log-entry {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.log-timestamp {
+  color: #888;
+  margin-right: 10px;
+}
+
+.log-message {
+  color: #d4d4d4;
+}
+
+.log-artifact {
+  color: #4ec9b0;
+}
+
+.log-artifact a {
+  color: #4ec9b0;
+  margin-left: 10px;
+  text-decoration: underline;
+}
+
+.log-artifact a:hover {
+  color: #6ec9b0;
+}
+

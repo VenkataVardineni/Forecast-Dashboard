@@ -1,0 +1,63 @@
+.forecast-chart {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-chart h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.forecast-chart.loading,
+.forecast-chart.error,
+.forecast-chart.empty {
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-skeleton,
+.error-message,
+.empty-message {
+  padding: 40px;
+  text-align: center;
+  color: #666;
+}
+
+.error-message {
+  color: #d32f2f;
+}
+
+.custom-tooltip {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-date {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.tooltip-value {
+  margin: 3px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.forecast-origin {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
