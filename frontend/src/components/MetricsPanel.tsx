@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingSkeleton from './LoadingSkeleton';
 import { ForecastResponse } from '../types';
 import './MetricsPanel.css';
 
@@ -11,7 +12,7 @@ const MetricsPanel: React.FC<MetricsPanelProps> = ({ data, loading }) => {
   if (loading) {
     return (
       <div className="metrics-panel loading">
-        <div className="loading-skeleton">Loading metrics...</div>
+        <LoadingSkeleton type="table" />
       </div>
     );
   }

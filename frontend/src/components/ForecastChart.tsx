@@ -11,6 +11,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import LoadingSkeleton from './LoadingSkeleton';
+import ErrorDisplay from './ErrorDisplay';
 import { ForecastResponse } from '../types';
 import { format } from 'date-fns';
 import './ForecastChart.css';
@@ -31,7 +33,7 @@ const ForecastChart: React.FC<ForecastChartProps> = ({
   if (loading) {
     return (
       <div className="forecast-chart loading">
-        <div className="loading-skeleton">Loading forecast data...</div>
+        <LoadingSkeleton type="chart" />
       </div>
     );
   }
@@ -39,9 +41,7 @@ const ForecastChart: React.FC<ForecastChartProps> = ({
   if (error) {
     return (
       <div className="forecast-chart error">
-        <div className="error-message">
-          <strong>Error:</strong> {error}
-        </div>
+        <ErrorDisplay error={error} retryable={true} onRetry={() => window.location.reload()} />
       </div>
     );
   }

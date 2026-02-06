@@ -4,7 +4,9 @@ import ForecastChart from '../components/ForecastChart';
 import MetricsPanel from '../components/MetricsPanel';
 import RunConsole from '../components/RunConsole';
 import { configApi, forecastApi } from '../utils/api';
-import { Config, ForecastResponse } from '../types';
+import { forecastCache } from '../utils/cache';
+import { handleError, retryRequest } from '../utils/errorHandler';
+import { Config, ForecastResponse, ForecastQuery } from '../types';
 import './DashboardPage.css';
 
 const DashboardPage: React.FC = () => {
@@ -35,23 +37,36 @@ const DashboardPage: React.FC = () => {
     }
   };
 
-  const loadForecast = async () => {
+  const loadForecast = async (forceRefresh: boolean = false) => {
     if (!selectedModel) return;
+
+    const query: ForecastQuery = {
+      model: selectedModel,
+      horizon: selectedHorizon,
+      fold_id: selectedFold,
+      overlay_mode: overlayMode,
+    };
+
+    // Check cache first
+    if (!forceRefresh) {
+      const cached = forecastCache.get(query);
+      if (cached) {
+        setForecastData(cached);
+        return;
+      }
+    }
 
     setLoading(true);
     setError(null);
 
     try {
-      const data = await forecastApi.queryForecast({
-        model: selectedModel,
-        horizon: selectedHorizon,
-        fold_id: selectedFold,
-        overlay_mode: overlayMode,
-      });
+      const data = await retryRequest(() => forecastApi.queryForecast(query));
+      forecastCache.set(query, data);
       setForecastData(data);
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Failed to load forecast data');
-      console.error(err);
+      const appError = handleError(err);
+      setError(appError.message);
+      console.error('Forecast load error:', err);
     } finally {
       setLoading(false);
     }
@@ -82,7 +97,7 @@ const DashboardPage: React.FC = () => {
             onHorizonChange={setSelectedHorizon}
             onFoldChange={setSelectedFold}
             onOverlayToggle={setOverlayMode}
-            onRunEvaluation={() => loadForecast()}
+            onRunEvaluation={() => loadForecast(true)}
           />
 
           <ForecastChart
