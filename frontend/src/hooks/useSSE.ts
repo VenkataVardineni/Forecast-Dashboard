@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { SSEEvent } from '../types';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8001';
 
 export const useSSE = (runId: string | null) => {
   const [events, setEvents] = useState<SSEEvent[]>([]);
